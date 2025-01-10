@@ -1,3 +1,27 @@
+
+
+
+
+# create container
+
+docker run --rm -e DISPLAY -v ~/.Xauthority:/root/.Xauthority:rw --network host -v /tmp/.X11-unix:/tmp/.X11-unix:rw -v /home/zhongzhipeng/vscode_projects/cobra/catkin_ws:/root/catkin_ws -v /mnt/c/network_share/dataset:/root/dataset --privileged --cap-add sys_ptrace --runtime=nvidia --gpus all -it --name cobra cobra_x86:ros_noetic-py3-torch-cuda /bin/bash
+
+# build
+cd /root/catkin_ws/src/cobra/src/glimpse_nvblox_ros1/nvblox/nvblox
+mkdir build && cd build && cmake .. && make -j3
+
+cd /root/catkin_ws
+catkin build pointcloud_image_converter nvblox_ros nvblox_rviz_plugin -DCMAKE_BUILD_TYPE=Release
+
+# run 
+source /root/catkin_ws/devel/setup.bash
+
+roslaunch nvblox_ros nvblox_lidar_ros_semantickitti.launch bag_file:=/root/datasets/semantic_kitti/semanticusl_sequence32_cylinder3d.bag
+
+roslaunch nvblox_ros nvblox_lidar_ros_semanticfusionportable.launch bag_file:=/root/datasets/semanticfusion/20220226_campus_road_day/20220226_campus_road_day/20220226_campus_road_day_r3live_semantics_framecam00.bag
+
+=====================================================================================================
+
 <div align="center">
   <a href="">
     <img align="center" src="docs/media/cobra_logo.png" height="130" alt="cobra">

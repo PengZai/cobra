@@ -12,6 +12,10 @@ ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get -y install tzdata
 
+ENV DIRPATH /root/
+WORKDIR $DIRPATH
+
+
 RUN mkdir -p /usr/app
 RUN apt-get update && apt-get install -y \
   libatlas-base-dev \
@@ -41,8 +45,9 @@ RUN apt install -y \
 # Install ROS-Noetic
 RUN sh -c '. /etc/lsb-release && echo "deb http://mirrors.ustc.edu.cn/ros/ubuntu/ `lsb_release -cs` main" > /etc/apt/sources.list.d/ros-latest.list'
 RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
-RUN apt update && apt install -y ros-noetic-ros-base
+RUN apt update && apt install -y ros-noetic-desktop
 RUN bash /opt/ros/noetic/setup.bash
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 RUN apt install -y \
   python3-rosdep \
   python3-rosinstall \
@@ -126,7 +131,7 @@ RUN apt-get install -y \
   ros-${ROS_DISTRO}-vision-msgs
 
 RUN mkdir /usr/app/segnet_requirements
-COPY src/HKUSTGZ_SegNet/requirements.txt /usr/app/segnet/requirements.txt
+COPY src/hkustgz_segnet/requirements.txt /usr/app/segnet/requirements.txt
 RUN pip3 install -r /usr/app/segnet/requirements.txt
 
 ############### Cobra-Planner
@@ -166,6 +171,11 @@ RUN apt-get install -y \
   libtool
 RUN git clone https://github.com/isl-org/Open3D
 RUN cd Open3D && mkdir build && cd build && cmake .. && make -j4 && make install 
+
+
+RUN echo 'source /opt/ros/noetic/setup.bash' >> ~/.bashrc
+RUN echo 'source ${HOME}/catkin_ws/devel/setup.bash' >> ~/.bashrc
+
 
 ############### Open3D (GUI)
 # RUN apt-get install -y libgl1-mesa-glx libc++1 libc++1-10 libc++abi1-10 libglfw3 libpng16-16

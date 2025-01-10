@@ -6,5 +6,5 @@ rviz -d cobra/rviz_cfg/cobra_semantickitti.rviz
 roslaunch nvblox_ros nvblox_lidar_ros_semantickitti.launch &
 
 # Run the Rosbag
-rosbag play semantickitti_sequence07.bag
+rosbag play /dataset/semantickitti/semantickitti_sequence07_cylinder3d.bag
 

@@ -1,6 +1,6 @@
 - git:
     local-name: catkin_simple
-    uri: https://github.com/ethz-asl/catkin_simple.git
+    uri: https://github.com/catkin/catkin_simple.git
 - git:
     local-name: ceres_catkin
     uri: https://github.com/ethz-asl/ceres_catkin.git
@@ -15,4 +15,4 @@
     uri: https://github.com/ethz-asl/glog_catkin.git
 - git:
     local-name: yaml_cpp_catkin
-    url: https://github.com/ethz-asl/yaml_cpp_catkin.git
+    uri: https://github.com/ethz-asl/yaml_cpp_catkin.git
