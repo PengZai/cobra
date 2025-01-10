@@ -4,7 +4,7 @@
 
 # create container
 
-docker run --rm -e DISPLAY -v ~/.Xauthority:/root/.Xauthority:rw --network host -v /tmp/.X11-unix:/tmp/.X11-unix:rw -v /home/zhongzhipeng/vscode_projects/cobra/catkin_ws:/root/catkin_ws -v /mnt/c/network_share/dataset:/root/dataset --privileged --cap-add sys_ptrace --runtime=nvidia --gpus all -it --name cobra cobra_x86:ros_noetic-py3-torch-cuda /bin/bash
+docker run --rm -e DISPLAY -v ~/.Xauthority:/root/.Xauthority:rw --network host -v /tmp/.X11-unix:/tmp/.X11-unix:rw -v /home/zhongzhipeng/vscode_projects/cobra/catkin_ws:/root/catkin_ws -v /mnt/usb/datasets:/root/dataset --privileged --cap-add sys_ptrace --runtime=nvidia --gpus all -it --name cobra cobra_x86:ros_noetic-py3-torch-cuda /bin/bash
 
 # build
 cd /root/catkin_ws/src/cobra/src/glimpse_nvblox_ros1/nvblox/nvblox
