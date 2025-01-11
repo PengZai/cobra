@@ -12,9 +12,6 @@ ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get -y install tzdata
 
-ENV DIRPATH /root/
-WORKDIR $DIRPATH
-
 
 RUN mkdir -p /usr/app
 RUN apt-get update && apt-get install -y \
@@ -176,6 +173,9 @@ RUN cd Open3D && mkdir build && cd build && cmake .. && make -j4 && make install
 RUN echo 'source /opt/ros/noetic/setup.bash' >> ~/.bashrc
 RUN echo 'source ${HOME}/catkin_ws/devel/setup.bash' >> ~/.bashrc
 
+
+ENV DIRPATH /root/
+WORKDIR $DIRPATH
 
 ############### Open3D (GUI)
 # RUN apt-get install -y libgl1-mesa-glx libc++1 libc++1-10 libc++abi1-10 libglfw3 libpng16-16
