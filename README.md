@@ -14,7 +14,6 @@ cd /root/catkin_ws
 catkin build pointcloud_image_converter nvblox_ros nvblox_rviz_plugin -DCMAKE_BUILD_TYPE=Release
 
 # run 
-source /root/catkin_ws/devel/setup.bash
 
 roslaunch nvblox_ros nvblox_lidar_ros_semantickitti.launch bag_file:=/root/datasets/semantic_kitti/semanticusl_sequence32_cylinder3d.bag
 
